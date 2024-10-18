@@ -45,3 +45,21 @@ test('Send error if attack is out of bounds', () => {
 			.toThrow(new Error('Attack is out of bounds'));
 	});
 });
+
+test('Return true because all ships are sunk', () => {
+	const gameboard = new Gameboard();
+	const ship = new Ship(1);
+	gameboard.placeShip(ship, [4, 2]);
+	gameboard.receiveAttack([4, 2]);
+	expect(gameboard.reportIfAllSunk()).toBe(true);
+});
+
+test('Return false because all ships are not sunk', () => {
+	const gameboard = new Gameboard();
+	const ship = new Ship(1);
+	const ship2 = new Ship(2);
+	gameboard.placeShip(ship, [4, 2]);
+	gameboard.placeShip(ship2, [6, 9]);
+	gameboard.receiveAttack([4, 2]);
+	expect(gameboard.reportIfAllSunk()).toBe(false);
+});

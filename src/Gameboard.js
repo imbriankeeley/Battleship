@@ -4,6 +4,7 @@ export class Gameboard {
 	constructor() {
 		this.matrix = [];
 		this.missedShots = [];
+		this.ships = [];
 		for (let i = 0; i < 10; i++) {
 			let row = [];
 			for (let j = 0; j < 10; j++) {
@@ -22,6 +23,7 @@ export class Gameboard {
 		let y = coor[1];
 		if (this.inBound(x, y)) {
 			this.matrix[y][x] = ship;
+			this.ships.push(ship);
 		} else {
 			throw new Error(
 				`Ship cannot be placed on [${x}, ${y}]. It is out of bounds.`
@@ -41,5 +43,14 @@ export class Gameboard {
 		} else {
 			throw new Error('Attack is out of bounds');
 		}
+	}
+
+	reportIfAllSunk() {
+		let allShips = this.ships.length;
+		let shipsSunk = 0;
+		this.ships.forEach((ship) => {
+			if (ship.isSunk()) shipsSunk++;
+		});
+		return shipsSunk == allShips ? true : false;
 	}
 }
