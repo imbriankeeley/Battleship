@@ -82,6 +82,23 @@ h2 {
     align-items: center;
 }
 
+.bottom {
+    gap: 1rem;
+    position: relative;
+}
+
+.shipSelect {
+    display: flex;
+    gap: 1rem;
+    margin-left: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.shipSelect > * {
+    cursor: move;
+    font-size: 1.5rem;
+}
+
 #start-game {
     background-color: #4CAF50;
     border: none;

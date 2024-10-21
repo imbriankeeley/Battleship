@@ -11,38 +11,194 @@ export class UserInterface {
 			Dom.renderBoard(player1, board1, true);
 			Dom.renderBoard(player2, board2);
 
-			const userShip1 = new Ship(3);
-			player1.placeShip(userShip1, [3, 0]);
-			player1.placeShip(userShip1, [3, 1]);
-			player1.placeShip(userShip1, [3, 2]);
-			const userShip2 = new Ship(4);
-			player1.placeShip(userShip2, [2, 5]);
-			player1.placeShip(userShip2, [1, 5]);
-			player1.placeShip(userShip2, [3, 5]);
-			player1.placeShip(userShip2, [4, 5]);
-			const userShip3 = new Ship(2);
-			player1.placeShip(userShip3, [8, 7]);
-			player1.placeShip(userShip3, [7, 7]);
-			Dom.renderBoard(player1, board1, true);
-
-			const compShip1 = new Ship(3);
-			player2.placeShip(compShip1, [0, 8]);
-			player2.placeShip(compShip1, [0, 7]);
-			player2.placeShip(compShip1, [0, 9]);
-			const compShip2 = new Ship(4);
-			player2.placeShip(compShip2, [6, 2]);
-			player2.placeShip(compShip2, [5, 2]);
-			player2.placeShip(compShip2, [4, 2]);
-			player2.placeShip(compShip2, [3, 2]);
-			const compShip3 = new Ship(2);
-			player2.placeShip(compShip3, [9, 5]);
-			player2.placeShip(compShip3, [9, 4]);
-			Dom.renderBoard(player2, board2);
+			UserInterface.computerRandomShips(player2, board2);
+			UserInterface.setupDragAndDrop(player1, board1);
 
 			startButton.addEventListener('click', () => {
-				UserInterface.startGame(player1, player2, board1, board2);
-				startButton.disabled = true;
+				if (player1.ships.length >= 9) {
+					UserInterface.startGame(player1, player2, board1, board2);
+					startButton.disabled = true;
+				} else {
+					alert(
+						'Please place all the ships before starting the game!'
+					);
+				}
 			});
+		});
+	}
+
+	static computerRandomShips(player, board) {
+		for (let i = 0; i < 3; i++) {
+			if (i == 0) {
+				const newShip = new Ship(2);
+				const x = Math.floor(Math.random() * 10);
+				const y = Math.floor(Math.random() * 10);
+				const coor = [x, y];
+				let direction = randomDirection();
+
+				if (typeof player.matrix[y][x] !== 'object') {
+					player.placeShip(newShip, coor);
+					placeAdjacentShip(
+						player,
+						newShip,
+						adjacentOpen(x, y, direction),
+						x,
+						y
+					);
+				}
+			} else if (i == 1) {
+				const newShip = new Ship(3);
+
+				let x = 0;
+				let y = 0;
+				let coor = [x, y];
+				let direction = randomDirection();
+
+				let shipsPlaced = 0;
+				while (shipsPlaced < 3) {
+					if (shipsPlaced > 0) {
+						coor = placeAdjacentShip(
+							player,
+							newShip,
+							adjacentOpen(x, y, direction),
+							x,
+							y
+						);
+						x = coor[0];
+						y = coor[1];
+						shipsPlaced++;
+					} else {
+						x = Math.floor(Math.random() * 10);
+						y = Math.floor(Math.random() * 10);
+						coor = [x, y];
+
+						if (typeof player.matrix[y][x] !== 'object') {
+							player.placeShip(newShip, coor);
+							shipsPlaced++;
+						}
+					}
+				}
+			} else if (i == 2) {
+				const newShip = new Ship(4);
+
+				let x = 0;
+				let y = 0;
+				let coor = [x, y];
+				let direction = randomDirection();
+
+				let shipsPlaced = 0;
+				while (shipsPlaced < 4) {
+					if (shipsPlaced > 0) {
+						coor = placeAdjacentShip(
+							player,
+							newShip,
+							adjacentOpen(x, y, direction),
+							x,
+							y
+						);
+						x = coor[0];
+						y = coor[1];
+						shipsPlaced++;
+					} else {
+						x = Math.floor(Math.random() * 10);
+						y = Math.floor(Math.random() * 10);
+						coor = [x, y];
+
+						if (typeof player.matrix[y][x] !== 'object') {
+							player.placeShip(newShip, coor);
+							shipsPlaced++;
+						}
+					}
+				}
+			}
+		}
+
+		function randomDirection() {
+			let direction = Math.round(Math.random());
+			return direction == 0 ? 'horizontal' : 'vertical';
+		}
+
+		function placeAdjacentShip(player, ship, direction, x, y) {
+			let newX = x,
+				newY = y;
+			if (direction == 'up') {
+				newY = y + 1;
+			} else if (direction == 'down') {
+				newY = y - 1;
+			} else if (direction == 'right') {
+				newX = x + 1;
+			} else if (direction == 'left') {
+				newX = x - 1;
+			}
+			player.placeShip(ship, [newX, newY]);
+			return [newX, newY];
+		}
+
+		function adjacentOpen(x, y, angle = 'vertical') {
+			const up = y + 1;
+			const down = y - 1;
+			const right = x + 1;
+			const left = x - 1;
+
+			if (angle == 'vertical') {
+				if (typeof player.matrix[up]?.[x] !== 'object' && up < 10) {
+					return 'up';
+				} else if (
+					typeof player.matrix[down]?.[x] !== 'object' &&
+					down >= 0
+				) {
+					return 'down';
+				}
+			}
+
+			if (angle == 'horizontal') {
+				if (
+					typeof player.matrix[y]?.[right] !== 'object' &&
+					right < 10
+				) {
+					return 'right';
+				} else if (
+					typeof player.matrix[y]?.[left] !== 'object' &&
+					left >= 0
+				) {
+					return 'left';
+				}
+			}
+		}
+
+		Dom.renderBoard(player, board);
+	}
+
+	static setupDragAndDrop(player, board) {
+		const ships = document.querySelectorAll('.shipSelect > div');
+		let draggedShip = null;
+
+		ships.forEach((ship) => {
+			ship.addEventListener('dragstart', (e) => {
+				draggedShip = e.target;
+			});
+			ship.addEventListener('dragend', () => {
+				draggedShip = null;
+			});
+		});
+
+		board.addEventListener('dragover', (e) => {
+			e.preventDefault();
+		});
+
+		board.addEventListener('drop', (e) => {
+			e.preventDefault();
+			if (draggedShip) {
+				const cellId = e.target.id.split(',').map(Number);
+				const [x, y] = cellId;
+
+				const newShip = new Ship(1);
+				player.placeShip(newShip, [x, y]);
+				draggedShip.remove();
+				Dom.renderBoard(player, board, true);
+			} else {
+				alert('Cannot place ship here!');
+			}
 		});
 	}
 
@@ -51,12 +207,7 @@ export class UserInterface {
 
 		let turn = player1;
 
-		const handleBoardClick = (
-			e,
-			attackingPlayer,
-			defendingPlayer,
-			defendingBoard
-		) => {
+		const handleBoardClick = (e, defendingPlayer, defendingBoard) => {
 			if (turn == player1 && e.currentTarget == board2) {
 				const cell = e.target;
 				if (cell.id) {
