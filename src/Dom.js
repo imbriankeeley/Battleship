@@ -40,6 +40,16 @@ export class Dom {
 						// shipSpan.append(shipIcon);
 						// cell.appendChild(shipSpan);
 					}
+				} else {
+					if (player.inMissedShots([x, y])) {
+						const missSpan = document.createElement('span');
+						const missIcon = document.createElement('i');
+						missIcon.classList.add('fa-solid');
+						missIcon.classList.add('fa-x');
+						missSpan.classList.add('miss');
+						missSpan.appendChild(missIcon);
+						cell.appendChild(missSpan);
+					}
 				}
 			}
 		}
