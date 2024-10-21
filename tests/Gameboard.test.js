@@ -63,3 +63,13 @@ test('Return false because all ships are not sunk', () => {
 	gameboard.receiveAttack([4, 2]);
 	expect(gameboard.reportIfAllSunk()).toBe(false);
 });
+
+test('When ship part has already been hit throw an error', () => {
+	const gameboard = new Gameboard();
+	const ship = new Ship(1);
+	gameboard.placeShip(ship, [4, 2]);
+	gameboard.receiveAttack([4, 2]);
+	expect(() => {
+		gameboard.receiveAttack([4, 2]);
+	}).toThrow(new Error('That part of the ship is already hit'));
+});

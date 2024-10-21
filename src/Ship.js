@@ -7,10 +7,18 @@ export class Ship {
 	}
 
 	hit(coor) {
-		if (this.hits < this.length) {
-			this.hits++;
-			this.takenHits.push(coor);
+		const isHit = this.takenHits.some(
+			(hit) => hit[0] === coor[0] && hit[1] === coor[1]
+		);
+		if (!isHit) {
+			if (this.hits < this.length) {
+				this.hits++;
+				this.takenHits.push(coor);
+			}
+		} else {
+			throw new Error('That part of the ship is already hit');
 		}
+
 		if (this.isSunk()) this.sunk = true;
 	}
 
