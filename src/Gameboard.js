@@ -36,7 +36,7 @@ export class Gameboard {
 		let y = coor[1];
 		if (this.inBound(x, y)) {
 			if (typeof this.matrix[y][x] === 'object') {
-				this.matrix[y][x].hit();
+				this.matrix[y][x].hit([x, y]);
 			} else {
 				this.missedShots.push([x, y]);
 			}

@@ -9,11 +9,8 @@ export class Dom {
 			domBoard.removeChild(domBoard.firstChild);
 		}
 
-		for (let i = 0; i < 10; i++) {
-			let y = i;
-			for (let j = 0; j < 10; j++) {
-				let x = j;
-
+		for (let y = 0; y < 10; y++) {
+			for (let x = 0; x < 10; x++) {
 				const cell = document.createElement('div');
 				cell.className = 'cell';
 				const hit = document.createElement('p');
@@ -25,9 +22,22 @@ export class Dom {
 				domBoard.appendChild(cell);
 
 				if (typeof board.matrix[y][x] === 'object') {
-					board.matrix[y][x].hit == true
-						? cell.append(hit)
-						: cell.append(ship);
+					const ship = board.matrix[y][x];
+					const isHit = ship.takenHits.some(
+						(hit) => hit[0] === x && hit[1] === y
+					);
+
+					if (isHit) {
+						const hitSpan = document.createElement('span');
+						hitSpan.textContent = 'X';
+						hitSpan.className = 'hit';
+						cell.appendChild(hitSpan);
+					} else {
+						const shipSpan = document.createElement('span');
+						shipSpan.textContent = 'O';
+						shipSpan.className = 'ship';
+						cell.appendChild(shipSpan);
+					}
 				}
 			}
 		}

@@ -19,6 +19,8 @@ export class UserInterface {
 			userGameboard.placeShip(userShip1, [0, 2]);
 			userGameboard.receiveAttack([0, 1]);
 			Dom.renderBoard(userGameboard, domUserBoard);
+			userGameboard.receiveAttack([0, 2]);
+			Dom.renderBoard(userGameboard, domUserBoard);
 		});
 	}
 }
