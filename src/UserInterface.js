@@ -1,8 +1,6 @@
 import { Dom, board1, board2, startButton } from './Dom';
 import { Gameboard } from './Gameboard';
 import { Ship } from './Ship';
-import { Player } from './Player';
-import { LocalStorage } from './LocalStorage';
 
 export class UserInterface {
 	static start() {

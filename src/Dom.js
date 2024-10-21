@@ -1,5 +1,3 @@
-import { Gameboard } from './Gameboard';
-
 export const board1 = document.getElementById('user-board');
 export const board2 = document.getElementById('computer-board');
 export const startButton = document.getElementById('start-game');
