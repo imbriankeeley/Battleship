@@ -45,6 +45,13 @@ export class Gameboard {
 		}
 	}
 
+	inMissedShots(coor) {
+		const isIn = this.missedShots.some(
+			(miss) => miss[0] === coor[0] && miss[1] === coor[1]
+		);
+		return isIn;
+	}
+
 	reportIfAllSunk() {
 		let allShips = this.ships.length;
 		let shipsSunk = 0;

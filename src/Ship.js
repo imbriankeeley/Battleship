@@ -7,10 +7,7 @@ export class Ship {
 	}
 
 	hit(coor) {
-		const isHit = this.takenHits.some(
-			(hit) => hit[0] === coor[0] && hit[1] === coor[1]
-		);
-		if (!isHit) {
+		if (!this.isHit(coor)) {
 			if (this.hits < this.length) {
 				this.hits++;
 				this.takenHits.push(coor);
@@ -20,6 +17,13 @@ export class Ship {
 		}
 
 		if (this.isSunk()) this.sunk = true;
+	}
+
+	isHit(coor) {
+		const isHit = this.takenHits.some(
+			(hit) => hit[0] === coor[0] && hit[1] === coor[1]
+		);
+		return isHit;
 	}
 
 	isSunk() {
