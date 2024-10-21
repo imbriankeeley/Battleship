@@ -8,7 +8,7 @@
 
 ![Battleship](./assets/battleship.PNG)
 
-### Simply click start game and your board will be loaded with ships. You can click on the computer board to attack and try to win the game!
+### There will be ships at the bottom of your board you can use to drag and drop on to your game board. After all your ships are placed you can click start and go against the computer who will have 3 ships randomly placed on the grid!
 
 ## Let's Connect!
 ### [LinkedIn](https://www.linkedin.com/in/bkeeley24/)
