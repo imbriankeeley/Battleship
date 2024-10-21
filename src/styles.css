@@ -117,3 +117,219 @@ h2 {
 #start-game:hover {
     background-color: #45a049;
 }
+
+@media (max-width: 1280px) {
+    .board-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 20rem;
+        width: 25rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 3rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .bottom {
+        margin-top: 4rem;
+    }
+
+    .shipSelect {
+        margin-left: 1.2rem;
+    }
+
+    #start-game {
+        height: 3rem;
+        width: 10rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .board-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 16rem;
+        width: 21rem;
+    }
+
+    .board {
+        height: 20rem;
+        width: 20rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 4rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .bottom {
+        margin-top: 4rem;
+    }
+
+    .shipSelect {
+        margin-left: 0rem;
+    }
+
+    .shipSelect > * {
+        cursor: move;
+        font-size: 1.3rem;
+    }
+
+    #start-game {
+        height: 3rem;
+        width: 10rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .board-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 10rem;
+        width: 15rem;
+    }
+
+    .board {
+        height: 13rem;
+        width: 13rem;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+        margin-bottom: 3rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    .bottom {
+        margin-top: 5rem;
+    }
+
+    .shipSelect {
+        margin-left: 1rem;
+        gap: .5rem;
+    }
+
+    .shipSelect > * {
+        cursor: move;
+        font-size: .9rem;
+    }
+
+    #start-game {
+        height: 3rem;
+        width: 10rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .board-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 6rem;
+        width: 11rem;
+    }
+
+    .board {
+        height: 9rem;
+        width: 9rem;
+    }
+
+    h1 {
+        font-size: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    h2 {
+        font-size: .9rem;
+    }
+
+    .bottom {
+        margin-top: 4rem;
+    }
+
+    .shipSelect {
+        margin-left: .5rem;
+        gap: .3rem;
+    }
+
+    .shipSelect > * {
+        cursor: move;
+        font-size: .8rem;
+    }
+
+    #start-game {
+        margin-top: -1rem;
+        height: 3rem;
+        width: 10rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 475px) {
+    .board-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 4rem;
+        width: 7rem;
+    }
+
+    .board {
+        height: 5rem;
+        width: 5rem;
+    }
+
+    h1 {
+        font-size: .7rem;
+        margin-bottom: 3rem;
+    }
+
+    h2 {
+        font-size: .5rem;
+    }
+
+    .bottom {
+        margin-top: 2rem;
+    }
+
+    .shipSelect {
+        margin-left: .3rem;
+        gap: .3rem;
+    }
+
+    .shipSelect > * {
+        cursor: move;
+        font-size: .4rem;
+    }
+
+    #start-game {
+        margin-top: -1rem;
+        height: 1rem;
+        width: 6rem;
+        font-size: .5rem;
+        padding: .6rem;
+    }
+}
