@@ -5,7 +5,7 @@ export const board2 = document.getElementById('computer-board');
 export const startButton = document.getElementById('start-game');
 
 export class Dom {
-	static renderBoard(player, board) {
+	static renderBoard(player, board, ships) {
 		while (board.firstChild) {
 			board.removeChild(board.firstChild);
 		}
@@ -31,14 +31,14 @@ export class Dom {
 						hitSpan.classList.add('hit');
 						hitSpan.append(hitIcon);
 						cell.appendChild(hitSpan);
-					} else {
-						// const shipSpan = document.createElement('span');
-						// const shipIcon = document.createElement('i');
-						// shipIcon.classList.add('fa-solid');
-						// shipIcon.classList.add('fa-ship');
-						// shipSpan.classList.add('ship');
-						// shipSpan.append(shipIcon);
-						// cell.appendChild(shipSpan);
+					} else if (ships == true) {
+						const shipSpan = document.createElement('span');
+						const shipIcon = document.createElement('i');
+						shipIcon.classList.add('fa-solid');
+						shipIcon.classList.add('fa-ship');
+						shipSpan.classList.add('ship');
+						shipSpan.append(shipIcon);
+						cell.appendChild(shipSpan);
 					}
 				} else {
 					if (player.inMissedShots([x, y])) {
