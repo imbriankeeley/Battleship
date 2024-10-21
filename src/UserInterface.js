@@ -259,8 +259,7 @@ export class UserInterface {
 			}
 		};
 
-		const player1ClickHandler = (e) =>
-			handleBoardClick(e, player1, player2, board2);
+		const player1ClickHandler = (e) => handleBoardClick(e, player2, board2);
 
 		board2.addEventListener('click', player1ClickHandler);
 	}
