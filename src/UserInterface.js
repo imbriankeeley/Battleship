@@ -30,84 +30,43 @@ export class UserInterface {
 	static computerRandomShips(player, board) {
 		for (let i = 0; i < 3; i++) {
 			if (i == 0) {
-				const newShip = new Ship(2);
-				const x = Math.floor(Math.random() * 10);
-				const y = Math.floor(Math.random() * 10);
-				const coor = [x, y];
-				let direction = randomDirection();
+				placeComputerShip(2);
+			} else if (i == 1) {
+				placeComputerShip(3);
+			} else if (i == 2) {
+				placeComputerShip(4);
+			}
+		}
 
-				if (typeof player.matrix[y][x] !== 'object') {
-					player.placeShip(newShip, coor);
-					placeAdjacentShip(
+		function placeComputerShip(shipSize) {
+			const newShip = new Ship(shipSize);
+
+			let x = 0;
+			let y = 0;
+			let coor = [x, y];
+			let direction = randomDirection();
+
+			let shipsPlaced = 0;
+			while (shipsPlaced < shipSize) {
+				if (shipsPlaced > 0) {
+					coor = placeAdjacentShip(
 						player,
 						newShip,
 						adjacentOpen(x, y, direction),
 						x,
 						y
 					);
-				}
-			} else if (i == 1) {
-				const newShip = new Ship(3);
+					x = coor[0];
+					y = coor[1];
+					shipsPlaced++;
+				} else {
+					x = Math.floor(Math.random() * 10);
+					y = Math.floor(Math.random() * 10);
+					coor = [x, y];
 
-				let x = 0;
-				let y = 0;
-				let coor = [x, y];
-				let direction = randomDirection();
-
-				let shipsPlaced = 0;
-				while (shipsPlaced < 3) {
-					if (shipsPlaced > 0) {
-						coor = placeAdjacentShip(
-							player,
-							newShip,
-							adjacentOpen(x, y, direction),
-							x,
-							y
-						);
-						x = coor[0];
-						y = coor[1];
+					if (typeof player.matrix[y][x] !== 'object') {
+						player.placeShip(newShip, coor);
 						shipsPlaced++;
-					} else {
-						x = Math.floor(Math.random() * 10);
-						y = Math.floor(Math.random() * 10);
-						coor = [x, y];
-
-						if (typeof player.matrix[y][x] !== 'object') {
-							player.placeShip(newShip, coor);
-							shipsPlaced++;
-						}
-					}
-				}
-			} else if (i == 2) {
-				const newShip = new Ship(4);
-
-				let x = 0;
-				let y = 0;
-				let coor = [x, y];
-				let direction = randomDirection();
-
-				let shipsPlaced = 0;
-				while (shipsPlaced < 4) {
-					if (shipsPlaced > 0) {
-						coor = placeAdjacentShip(
-							player,
-							newShip,
-							adjacentOpen(x, y, direction),
-							x,
-							y
-						);
-						x = coor[0];
-						y = coor[1];
-						shipsPlaced++;
-					} else {
-						x = Math.floor(Math.random() * 10);
-						y = Math.floor(Math.random() * 10);
-						coor = [x, y];
-
-						if (typeof player.matrix[y][x] !== 'object') {
-							player.placeShip(newShip, coor);
-							shipsPlaced++;
-						}
 					}
 				}
 			}
